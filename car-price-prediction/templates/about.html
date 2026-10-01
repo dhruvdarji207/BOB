@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CarPriceAI — About</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand"><span class="brand-icon">⚡</span>CarPriceAI</a>
+    <button class="nav-toggle" id="navToggle">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/">Home</a></li>
+      <li><a href="/predict">Predict</a></li>
+      <li><a href="/insights">Model Insights</a></li>
+      <li><a href="/about" class="active">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <h1>About</h1>
+    <p>How CarPriceAI works — methodology, architecture and limitations.</p>
+  </div>
+</div>
+
+<div class="container about-container">
+
+  <!-- What is it -->
+  <div class="about-card">
+    <h2>What Is This Application?</h2>
+    <p>
+      <strong>CarPriceAI</strong> is a machine-learning-based car price prediction system.
+      Given a set of vehicle specifications — such as engine size, horsepower, body style and manufacturer —
+      the application uses a trained regression model to generate an estimated selling price.
+    </p>
+    <p>
+      The system is built on a real automotive dataset containing 205 records and 24 predictive features.
+      It is not a lookup table; every prediction is computed live by the ML model.
+    </p>
+    <div class="alert alert-info">
+      <strong>Important:</strong> Predictions are estimates based on historical dataset patterns.
+      They do not represent actual current market prices, which depend on depreciation, location,
+      negotiation and many other factors not captured in this dataset.
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="about-card">
+    <h2>How It Works</h2>
+    <div class="workflow">
+      <div class="workflow-step">
+        <div class="wf-num">1</div>
+        <div class="wf-body">
+          <h4>User Input</h4>
+          <p>You fill in vehicle specifications on the Predict page: manufacturer, engine size, horsepower, body style, dimensions, fuel efficiency and more.</p>
+        </div>
+      </div>
+      <div class="workflow-arrow">↓</div>
+      <div class="workflow-step">
+        <div class="wf-num">2</div>
+        <div class="wf-body">
+          <h4>Data Validation</h4>
+          <p>The Flask backend validates all fields — required fields, numeric ranges, and categorical value membership.</p>
+        </div>
+      </div>
+      <div class="workflow-arrow">↓</div>
+      <div class="workflow-step">
+        <div class="wf-num">3</div>
+        <div class="wf-body">
+          <h4>Preprocessing</h4>
+          <p>The same scikit-learn preprocessing pipeline used during training is applied to your input: StandardScaler for numerics, OneHotEncoder for categoricals.</p>
+        </div>
+      </div>
+      <div class="workflow-arrow">↓</div>
+      <div class="workflow-step">
+        <div class="wf-num">4</div>
+        <div class="wf-body">
+          <h4>Machine Learning Model</h4>
+          <p>The preprocessed feature vector is passed to the best-performing regression model selected during training (e.g. Random Forest or Gradient Boosting).</p>
+        </div>
+      </div>
+      <div class="workflow-arrow">↓</div>
+      <div class="workflow-step">
+        <div class="wf-num">5</div>
+        <div class="wf-body">
+          <h4>Price Prediction</h4>
+          <p>The model outputs a predicted price in USD based on learned patterns from the training data.</p>
+        </div>
+      </div>
+      <div class="workflow-arrow">↓</div>
+      <div class="workflow-step">
+        <div class="wf-num">6</div>
+        <div class="wf-body">
+          <h4>Result</h4>
+          <p>The predicted price is returned as JSON and displayed instantly in the browser — no page reload required.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dataset -->
+  <div class="about-card">
+    <h2>Dataset</h2>
+    <p>
+      The model is trained on the <strong>CarPrice Assignment Dataset</strong>, a commonly used
+      automotive pricing dataset containing 205 records across 26 columns.
+    </p>
+    <div class="about-grid">
+      <div class="about-stat"><span class="stat-n">205</span><span class="stat-l">Records</span></div>
+      <div class="about-stat"><span class="stat-n">24</span><span class="stat-l">Predictive Features</span></div>
+      <div class="about-stat"><span class="stat-n">22</span><span class="stat-l">Car Brands</span></div>
+      <div class="about-stat"><span class="stat-n">1</span><span class="stat-l">Target (Price)</span></div>
+    </div>
+    <h4>Feature Categories</h4>
+    <div class="tag-list">
+      <span class="tag">Manufacturer</span>
+      <span class="tag">Fuel Type</span>
+      <span class="tag">Aspiration</span>
+      <span class="tag">Door Number</span>
+      <span class="tag">Car Body</span>
+      <span class="tag">Drive Wheel</span>
+      <span class="tag">Engine Location</span>
+      <span class="tag">Engine Type</span>
+      <span class="tag">Cylinders</span>
+      <span class="tag">Engine Size</span>
+      <span class="tag">Fuel System</span>
+      <span class="tag">Horsepower</span>
+      <span class="tag">Peak RPM</span>
+      <span class="tag">Bore Ratio</span>
+      <span class="tag">Stroke</span>
+      <span class="tag">Compression Ratio</span>
+      <span class="tag">Wheelbase</span>
+      <span class="tag">Dimensions</span>
+      <span class="tag">Curb Weight</span>
+      <span class="tag">City MPG</span>
+      <span class="tag">Highway MPG</span>
+      <span class="tag">Symboling</span>
+    </div>
+  </div>
+
+  <!-- ML Methodology -->
+  <div class="about-card">
+    <h2>Machine Learning Methodology</h2>
+    <h4>Model Selection</h4>
+    <p>Six regression algorithms are trained and evaluated:</p>
+    <ul class="method-list">
+      <li><strong>Linear Regression</strong> — Baseline model</li>
+      <li><strong>Ridge Regression</strong> — L2 regularized linear model</li>
+      <li><strong>Random Forest Regressor</strong> — Ensemble of decision trees</li>
+      <li><strong>Gradient Boosting Regressor</strong> — Sequential boosting ensemble</li>
+      <li><strong>Extra Trees Regressor</strong> — Extremely randomized trees</li>
+      <li><strong>HistGradientBoostingRegressor</strong> — Histogram-based gradient boosting</li>
+    </ul>
+    <h4>Evaluation Metrics</h4>
+    <ul class="method-list">
+      <li><strong>R²</strong> — Proportion of variance explained (closer to 1 is better)</li>
+      <li><strong>MAE</strong> — Mean Absolute Error in dollars</li>
+      <li><strong>RMSE</strong> — Root Mean Squared Error (penalises large errors)</li>
+      <li><strong>5-Fold CV R²</strong> — Cross-validated R² to assess generalisation</li>
+    </ul>
+    <h4>Data Leakage Prevention</h4>
+    <ul class="method-list">
+      <li><code>price</code> is never used as an input feature</li>
+      <li><code>car_ID</code> is dropped (not predictive)</li>
+      <li>Preprocessing (scaler, encoder) is fitted only on training data</li>
+      <li>The complete fitted pipeline is saved — inference uses the exact same transformations</li>
+    </ul>
+  </div>
+
+  <!-- Tech Stack -->
+  <div class="about-card">
+    <h2>Technology Stack</h2>
+    <div class="tech-grid">
+      <div class="tech-item">
+        <div class="tech-icon">🐍</div>
+        <div>
+          <strong>Python 3</strong>
+          <p>Backend language</p>
+        </div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">🌶️</div>
+        <div>
+          <strong>Flask</strong>
+          <p>Web framework &amp; REST API</p>
+        </div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">🤖</div>
+        <div>
+          <strong>scikit-learn</strong>
+          <p>ML pipeline &amp; models</p>
+        </div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">🐼</div>
+        <div>
+          <strong>pandas</strong>
+          <p>Data manipulation</p>
+        </div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">💾</div>
+        <div>
+          <strong>joblib</strong>
+          <p>Model serialization</p>
+        </div>
+      </div>
+      <div class="tech-item">
+        <div class="tech-icon">📊</div>
+        <div>
+          <strong>Chart.js</strong>
+          <p>Frontend visualizations</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Limitations -->
+  <div class="about-card">
+    <h2>Limitations</h2>
+    <ul class="method-list">
+      <li>Trained on only 205 records — a larger dataset would improve accuracy.</li>
+      <li>The dataset is from an older era; modern vehicles may have very different pricing dynamics.</li>
+      <li>Geographic factors (taxes, import duties, regional demand) are not captured.</li>
+      <li>Condition, mileage and maintenance history are not included in the features.</li>
+      <li>The model extrapolates poorly for car specifications very different from the training distribution.</li>
+      <li>Currency conversion is not performed — all prices are in the dataset's original units (USD).</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p class="muted">CarPriceAI is a demonstration of an end-to-end ML web application. · <a href="/">Return Home</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
